@@ -1,0 +1,16 @@
+PODS:
+  - BeiJingDailyInfomant (0.1.0)
+
+DEPENDENCIES:
+  - BeiJingDailyInfomant (from `../`)
+
+EXTERNAL SOURCES:
+  BeiJingDailyInfomant:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  BeiJingDailyInfomant: 556eda90d69768dae9863045fa8893dc6a6aa6ce
+
+PODFILE CHECKSUM: 80f843300b58ad28113d739c1714dbf71455e113
+
+COCOAPODS: 1.8.4

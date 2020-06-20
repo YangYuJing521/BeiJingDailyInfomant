@@ -1,0 +1,6 @@
+framework module BeiJingDailyInfomant {
+  umbrella header "BeiJingDailyInfomant-umbrella.h"
+
+  export *
+  module * { export * }
+}

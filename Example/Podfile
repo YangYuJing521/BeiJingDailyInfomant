@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+target 'BeiJingDailyInfomant_Example' do
+  pod 'BeiJingDailyInfomant', :path => '../'
+
+  target 'BeiJingDailyInfomant_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
