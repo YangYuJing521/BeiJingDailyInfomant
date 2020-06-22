@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "BDInfomantMainVC.h"
 
 FOUNDATION_EXPORT double BeiJingDailyInfomantVersionNumber;
 FOUNDATION_EXPORT const unsigned char BeiJingDailyInfomantVersionString[];

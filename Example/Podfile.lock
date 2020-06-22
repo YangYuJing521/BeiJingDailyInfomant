@@ -1,16 +1,25 @@
 PODS:
   - BeiJingDailyInfomant (0.1.0)
+  - YYCategories (1.0.4):
+    - YYCategories/no-arc (= 1.0.4)
+  - YYCategories/no-arc (1.0.4)
 
 DEPENDENCIES:
-  - BeiJingDailyInfomant (from `../`)
+  - BeiJingDailyInfomant (from `./LocalPods/BeiJingDailyInfomant`)
+  - YYCategories
+
+SPEC REPOS:
+  trunk:
+    - YYCategories
 
 EXTERNAL SOURCES:
   BeiJingDailyInfomant:
-    :path: "../"
+    :path: "./LocalPods/BeiJingDailyInfomant"
 
 SPEC CHECKSUMS:
-  BeiJingDailyInfomant: 556eda90d69768dae9863045fa8893dc6a6aa6ce
+  BeiJingDailyInfomant: a6ddf6cadf72678144a6f75acb80d73ff78d43e1
+  YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: 80f843300b58ad28113d739c1714dbf71455e113
+PODFILE CHECKSUM: 2d4c983b01ae5007e4a21ab05bae39760ff7e5cb
 
 COCOAPODS: 1.8.4

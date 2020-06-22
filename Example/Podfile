@@ -3,7 +3,10 @@ use_frameworks!
 platform :ios, '8.0'
 
 target 'BeiJingDailyInfomant_Example' do
-  pod 'BeiJingDailyInfomant', :path => '../'
+  pod 'BeiJingDailyInfomant', :path => './LocalPods/BeiJingDailyInfomant'
+
+  
+  pod 'YYCategories'  #功能丰富的 Category 类型工具库
 
   target 'BeiJingDailyInfomant_Tests' do
     inherit! :search_paths

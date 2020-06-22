@@ -18,5 +18,5 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "BeiJingDailyInfomant/Classes/**/*"
+  "source_files": "**/*.{h,m}"
 }
