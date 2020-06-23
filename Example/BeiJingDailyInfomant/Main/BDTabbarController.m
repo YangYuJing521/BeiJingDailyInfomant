@@ -50,21 +50,21 @@
 {
     
     NSArray *childArray = @[
-                            @{MallClassKey  : @"UIViewController",
+                            @{MallClassKey  : @"BDBaseController",
                               MallTitleKey  : @"新闻",
                               MallImgKey    : @"icon-home",
                               MallSelImgKey : @"icon-home-act",},
-                            @{MallClassKey  : @"UIViewController",
+                            @{MallClassKey  : @"BDBaseController",
                               MallTitleKey  : @"直播",
                               MallImgKey    : @"icon_chat",
                               MallSelImgKey : @"icon_chat_act"},
                             @{
-                              MallClassKey  : @"UIViewController",
+                              MallClassKey  : @"BDBaseController",
                               MallTitleKey  : @"北京号",
                               MallImgKey    : @"icon-shopkeeper",
                               MallSelImgKey : @"icon-shopkeeper-act",},
                             @{
-                               MallClassKey  : @"UIViewController",
+                               MallClassKey  : @"BDBaseController",
                                MallTitleKey  : @"服务",
                                MallImgKey    : @"icon-shopkeeper",
                                MallSelImgKey : @"icon-shopkeeper-act",},
