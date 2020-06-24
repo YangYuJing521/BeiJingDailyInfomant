@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-typedef NS_ENUM(NSInteger, NSTabBarType) {
-    NSTabBarTypeHome = 0,  //首页
-    NSTabBarTypeLive,
-    NSTabBarTypeBJNum,
-    NSTabBarTypeService,
-    NSTabBarTypeMe,
+typedef NS_ENUM(NSInteger, BDTabBarType) {
+    BDTabBarTypeHome = 0,  //首页
+    BDTabBarTypeLive = 1,
+    BDTabBarTypeBJNum = 2,
+    BDTabBarTypeService = 3,
+    BDTabBarTypeMe = 4,
 };
 
 

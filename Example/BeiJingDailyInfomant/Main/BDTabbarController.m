@@ -25,9 +25,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.delegate = self;
+    //解决iOS13 变蓝问题
+    if (@available(iOS 13.0, *)){
+        self.tabBar.tintColor = GMRedTextColor238_50_40;
+    }
 
     [self addDcChildViewContorller];
-    self.selectedViewController = [self.viewControllers objectAtIndex:NSTabBarTypeHome]; //默认选择首页index为0
+    self.selectedViewController = [self.viewControllers objectAtIndex:BDTabBarTypeHome]; //默认选择首页index为0
     //背景颜色
     [self.tabBar setShadowImage:[self imageWithColor:[UIColor whiteColor] Hight:0.5]];
     [self.tabBar setBackgroundImage:[self imageWithColor:[UIColor whiteColor] Hight:0.5]];
@@ -85,6 +89,9 @@
         item.image = [[UIImage imageNamed:dict[MallImgKey]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         item.selectedImage = [[UIImage imageNamed:dict[MallSelImgKey]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         item.title = [dict objectOrNilForKey:MallTitleKey];
+        if (i == BDTabBarTypeService) {
+            
+        }
         NSDictionary *normal = @{
                                  NSFontAttributeName:PFRFont(10),
                                  NSForegroundColorAttributeName:GMRedTextColor238_50_40,

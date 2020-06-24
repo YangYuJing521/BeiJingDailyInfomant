@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BDTabbarController : UITabBarController
 /* 控制器type */
-@property (nonatomic, assign) NSTabBarType TabbarVcType;
+@property (nonatomic, assign) BDTabBarType TabbarVcType;
 
 @end
 
