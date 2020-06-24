@@ -23,6 +23,34 @@ PODS:
   - SDWebImage (5.8.1):
     - SDWebImage/Core (= 5.8.1)
   - SDWebImage/Core (5.8.1)
+  - YJUsefulUIKit (1.0.1):
+    - YJUsefulUIKit/YJBaseCells (= 1.0.1)
+    - YJUsefulUIKit/YJBasicDepand (= 1.0.1)
+    - YJUsefulUIKit/YJCycleScrollow (= 1.0.1)
+    - YJUsefulUIKit/YJExtension (= 1.0.1)
+    - YJUsefulUIKit/YJGuidePageView (= 1.0.1)
+    - YJUsefulUIKit/YJNocrash (= 1.0.1)
+    - YJUsefulUIKit/YJProgressWKWebView (= 1.0.1)
+    - YJUsefulUIKit/YJToast (= 1.0.1)
+    - YJUsefulUIKit/YJUICommon (= 1.0.1)
+  - YJUsefulUIKit/YJBaseCells (1.0.1):
+    - YJUsefulUIKit/YJUICommon
+  - YJUsefulUIKit/YJBasicDepand (1.0.1):
+    - YJUsefulUIKit/YJExtension
+    - YJUsefulUIKit/YJUICommon
+  - YJUsefulUIKit/YJCycleScrollow (1.0.1):
+    - SDWebImage
+    - YJUsefulUIKit/YJUICommon
+  - YJUsefulUIKit/YJExtension (1.0.1):
+    - YJUsefulUIKit/YJUICommon
+    - YYCategories
+  - YJUsefulUIKit/YJGuidePageView (1.0.1)
+  - YJUsefulUIKit/YJNocrash (1.0.1)
+  - YJUsefulUIKit/YJProgressWKWebView (1.0.1):
+    - Masonry
+  - YJUsefulUIKit/YJToast (1.0.1)
+  - YJUsefulUIKit/YJUICommon (1.0.1):
+    - YJUsefulUIKit/YJNocrash
   - YYCategories (1.0.4):
     - YYCategories/no-arc (= 1.0.4)
   - YYCategories/no-arc (1.0.4)
@@ -36,10 +64,11 @@ DEPENDENCIES:
   - MJRefresh
   - pop
   - SDWebImage
+  - YJUsefulUIKit (~> 1.0.1)
   - YYCategories
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - Masonry
     - MGJRouter
@@ -47,6 +76,7 @@ SPEC REPOS:
     - MJRefresh
     - pop
     - SDWebImage
+    - YJUsefulUIKit
     - YYCategories
 
 EXTERNAL SOURCES:
@@ -62,8 +92,9 @@ SPEC CHECKSUMS:
   MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
+  YJUsefulUIKit: 6edce3d9f15fa12e43fc512aedfde0ffe48fa49b
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: ac9cb64db9527795668f0b67d7b689433576aac9
+PODFILE CHECKSUM: c39cc52b489328e8d37c65840ff04c3a64dc201e
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3

@@ -19,7 +19,10 @@
     [self.window makeKeyAndVisible];
     self.window.rootViewController =  [NSClassFromString(@"BDTabbarController") new];
     //配置路由
-    [self registSchemes];
+    WEAKSELF
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self registSchemes];
+//    });
     return YES;
     
 }

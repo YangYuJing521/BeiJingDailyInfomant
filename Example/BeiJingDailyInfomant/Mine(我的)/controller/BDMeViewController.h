@@ -7,8 +7,7 @@
 //
 
 @import UIKit;
-#import "BDHideNavBaseController.h"
 
-@interface BDMeViewController : BDHideNavBaseController
+@interface BDMeViewController : YJHideNavBaseController
 
 @end

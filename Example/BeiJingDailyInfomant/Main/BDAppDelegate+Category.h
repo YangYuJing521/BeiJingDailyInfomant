@@ -13,6 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BDAppDelegate (Category)
+/** 注册路由  */
 - (void)registSchemes;
 @end
 

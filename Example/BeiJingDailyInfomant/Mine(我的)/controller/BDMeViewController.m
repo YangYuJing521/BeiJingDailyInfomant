@@ -47,7 +47,7 @@ static NSString *const BDMeBaoLiaoReusableViewID = @"BDMeBaoLiaoReusableViewID";
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    TemplateBaseCell *gridCell = nil;
+    YJTemplateBaseCell *gridCell = nil;
     if (indexPath.section == 0) {
         BDMeTopFourCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:BDMeTopFourCellID forIndexPath:indexPath];
         gridCell = cell;
@@ -57,7 +57,7 @@ static NSString *const BDMeBaoLiaoReusableViewID = @"BDMeBaoLiaoReusableViewID";
     return gridCell;
 }
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    TemplateBaseReusableView *gridView = nil;
+    YJTemplateBaseReusableView *gridView = nil;
     if (indexPath.section==1) {
         BDMeBaoLiaoReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BDMeBaoLiaoReusableViewID forIndexPath:indexPath];
         gridView = header;

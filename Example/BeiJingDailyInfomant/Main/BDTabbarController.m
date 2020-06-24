@@ -7,7 +7,7 @@
 //
 
 #import "BDTabbarController.h"
-#import "BDNavigationController.h"
+#import "YJNavigationController.h"
 
 @interface BDTabbarController ()<UITabBarControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *tabBarItems;
@@ -27,7 +27,7 @@
     self.delegate = self;
 
     [self addDcChildViewContorller];
-    self.selectedViewController = [self.viewControllers objectAtIndex:GMTabBarControllerHome]; //默认选择首页index为0
+    self.selectedViewController = [self.viewControllers objectAtIndex:NSTabBarTypeHome]; //默认选择首页index为0
     //背景颜色
     [self.tabBar setShadowImage:[self imageWithColor:[UIColor whiteColor] Hight:0.5]];
     [self.tabBar setBackgroundImage:[self imageWithColor:[UIColor whiteColor] Hight:0.5]];
@@ -50,21 +50,21 @@
 {
     
     NSArray *childArray = @[
-                            @{MallClassKey  : @"BDBaseController",
+                            @{MallClassKey  : @"BDTestViewController",
                               MallTitleKey  : @"新闻",
                               MallImgKey    : @"icon-home",
                               MallSelImgKey : @"icon-home-act",},
-                            @{MallClassKey  : @"BDBaseController",
+                            @{MallClassKey  : @"BDTestViewController",
                               MallTitleKey  : @"直播",
                               MallImgKey    : @"icon_chat",
                               MallSelImgKey : @"icon_chat_act"},
                             @{
-                              MallClassKey  : @"BDBaseController",
+                              MallClassKey  : @"BDTestViewController",
                               MallTitleKey  : @"北京号",
                               MallImgKey    : @"icon-shopkeeper",
                               MallSelImgKey : @"icon-shopkeeper-act",},
                             @{
-                               MallClassKey  : @"BDBaseController",
+                               MallClassKey  : @"BDTestViewController",
                                MallTitleKey  : @"服务",
                                MallImgKey    : @"icon-shopkeeper",
                                MallSelImgKey : @"icon-shopkeeper-act",},
@@ -78,15 +78,13 @@
     for (int i = 0; i<childArray.count; i++) {
         NSDictionary *dict = [childArray objectOrNilAtIndex:i];
         UIViewController *vc = [NSClassFromString(dict[MallClassKey]) new];
-        BDNavigationController *nav = [[BDNavigationController alloc] initWithRootViewController:vc];
+        vc.title = dict[MallTitleKey];
+        YJNavigationController *nav = [[YJNavigationController alloc] initWithRootViewController:vc];
         [self addChildViewController:nav];
         UITabBarItem *item = vc.tabBarItem;
         item.image = [[UIImage imageNamed:dict[MallImgKey]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         item.selectedImage = [[UIImage imageNamed:dict[MallSelImgKey]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         item.title = [dict objectOrNilForKey:MallTitleKey];
-        if (i == GMTabBarControllerShopKeeper) {
-            
-        }
         NSDictionary *normal = @{
                                  NSFontAttributeName:PFRFont(10),
                                  NSForegroundColorAttributeName:GMRedTextColor238_50_40,

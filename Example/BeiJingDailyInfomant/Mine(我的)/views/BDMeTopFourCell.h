@@ -6,11 +6,10 @@
 //  Copyright © 2020 silverBullet. All rights reserved.
 //
 
-#import "TemplateBaseCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BDMeTopFourCell : TemplateBaseCell
+@interface BDMeTopFourCell : YJTemplateBaseCell
 
 @end
 

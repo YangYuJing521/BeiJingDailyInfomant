@@ -6,11 +6,10 @@
 //  Copyright © 2020 silverBullet. All rights reserved.
 //
 
-#import "TemplateBaseReusableView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BDMeBaoLiaoReusableView : TemplateBaseReusableView
+@interface BDMeBaoLiaoReusableView : YJTemplateBaseReusableView
 
 @end
 
