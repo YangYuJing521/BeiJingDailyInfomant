@@ -28,6 +28,9 @@
 		49DDE27A24A1EB4F001C0643 /* TemplateBaseReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DDE27624A1EB4F001C0643 /* TemplateBaseReusableView.m */; };
 		49DDE27B24A1EB4F001C0643 /* GMTemplateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DDE27824A1EB4F001C0643 /* GMTemplateTableViewCell.m */; };
 		49DDE27E24A1EBC0001C0643 /* BDMeTopFourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DDE27D24A1EBC0001C0643 /* BDMeTopFourCell.m */; };
+		49DDE28124A20221001C0643 /* BDMeBaoLiaoReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DDE28024A20221001C0643 /* BDMeBaoLiaoReusableView.m */; };
+		49DDE28724A2246A001C0643 /* BDAppDelegate+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DDE28624A2246A001C0643 /* BDAppDelegate+Category.m */; };
+		49DDE28A24A225C4001C0643 /* BDConfigs.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DDE28924A225C4001C0643 /* BDConfigs.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -107,6 +110,12 @@
 		49DDE27824A1EB4F001C0643 /* GMTemplateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMTemplateTableViewCell.m; sourceTree = "<group>"; };
 		49DDE27C24A1EBC0001C0643 /* BDMeTopFourCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMeTopFourCell.h; sourceTree = "<group>"; };
 		49DDE27D24A1EBC0001C0643 /* BDMeTopFourCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMeTopFourCell.m; sourceTree = "<group>"; };
+		49DDE27F24A20221001C0643 /* BDMeBaoLiaoReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDMeBaoLiaoReusableView.h; sourceTree = "<group>"; };
+		49DDE28024A20221001C0643 /* BDMeBaoLiaoReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDMeBaoLiaoReusableView.m; sourceTree = "<group>"; };
+		49DDE28524A2246A001C0643 /* BDAppDelegate+Category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BDAppDelegate+Category.h"; sourceTree = "<group>"; };
+		49DDE28624A2246A001C0643 /* BDAppDelegate+Category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BDAppDelegate+Category.m"; sourceTree = "<group>"; };
+		49DDE28824A225C4001C0643 /* BDConfigs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDConfigs.h; sourceTree = "<group>"; };
+		49DDE28924A225C4001C0643 /* BDConfigs.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDConfigs.m; sourceTree = "<group>"; };
 		5892495CCDE3CDDE6C363A23 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* BeiJingDailyInfomant_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeiJingDailyInfomant_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -232,6 +241,10 @@
 				49DDE26824A0ABB5001C0643 /* BDHideNavBaseController.m */,
 				6003F59C195388D20070C39A /* BDAppDelegate.h */,
 				6003F59D195388D20070C39A /* BDAppDelegate.m */,
+				49DDE28524A2246A001C0643 /* BDAppDelegate+Category.h */,
+				49DDE28624A2246A001C0643 /* BDAppDelegate+Category.m */,
+				49DDE28824A225C4001C0643 /* BDConfigs.h */,
+				49DDE28924A225C4001C0643 /* BDConfigs.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -257,20 +270,14 @@
 		49DDE26C24A0D639001C0643 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				49DDE27024A1EB02001C0643 /* cells */,
-				49DDE26D24A0D7C3001C0643 /* BDMeHeadView.h */,
-				49DDE26E24A0D7C3001C0643 /* BDMeHeadView.m */,
-			);
-			path = views;
-			sourceTree = "<group>";
-		};
-		49DDE27024A1EB02001C0643 /* cells */ = {
-			isa = PBXGroup;
-			children = (
 				49DDE27C24A1EBC0001C0643 /* BDMeTopFourCell.h */,
 				49DDE27D24A1EBC0001C0643 /* BDMeTopFourCell.m */,
+				49DDE26D24A0D7C3001C0643 /* BDMeHeadView.h */,
+				49DDE26E24A0D7C3001C0643 /* BDMeHeadView.m */,
+				49DDE27F24A20221001C0643 /* BDMeBaoLiaoReusableView.h */,
+				49DDE28024A20221001C0643 /* BDMeBaoLiaoReusableView.m */,
 			);
-			path = cells;
+			path = views;
 			sourceTree = "<group>";
 		};
 		49DDE27124A1EB4F001C0643 /* baseCells */ = {
@@ -535,7 +542,9 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-BeiJingDailyInfomant_Example/Pods-BeiJingDailyInfomant_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/BeiJingDailyInfomant/BeiJingDailyInfomant.framework",
+				"${BUILT_PRODUCTS_DIR}/MGJRouter/MGJRouter.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
@@ -545,7 +554,9 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BeiJingDailyInfomant.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGJRouter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
@@ -565,6 +576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49DDE28724A2246A001C0643 /* BDAppDelegate+Category.m in Sources */,
 				49DDE24724A09137001C0643 /* UILabel+Extension.m in Sources */,
 				49DDE24D24A09137001C0643 /* UIButton+Extension.m in Sources */,
 				6003F59E195388D20070C39A /* BDAppDelegate.m in Sources */,
@@ -576,12 +588,14 @@
 				49DDE27A24A1EB4F001C0643 /* TemplateBaseReusableView.m in Sources */,
 				49DDE25E24A099AC001C0643 /* PodUtil.m in Sources */,
 				49DDE24B24A09137001C0643 /* UIView+BorderLine.m in Sources */,
+				49DDE28A24A225C4001C0643 /* BDConfigs.m in Sources */,
 				49DDE24A24A09137001C0643 /* NSDictionary+GMCategory.m in Sources */,
 				49DDE25D24A099AC001C0643 /* GMDateFormatter.m in Sources */,
 				49DDE26324A09C04001C0643 /* BDTabbarController.m in Sources */,
 				49DDE27B24A1EB4F001C0643 /* GMTemplateTableViewCell.m in Sources */,
 				49DDE26024A099AC001C0643 /* GMFilterTool.m in Sources */,
 				49DDE26924A0ABB5001C0643 /* BDHideNavBaseController.m in Sources */,
+				49DDE28124A20221001C0643 /* BDMeBaoLiaoReusableView.m in Sources */,
 				49DDE24C24A09137001C0643 /* UIBarButtonItem+Extension.m in Sources */,
 				49DDE24824A09137001C0643 /* UICollectionView+Category.m in Sources */,
 				49DDE27E24A1EBC0001C0643 /* BDMeTopFourCell.m in Sources */,

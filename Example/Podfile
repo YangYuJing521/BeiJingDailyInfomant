@@ -9,10 +9,11 @@ target 'BeiJingDailyInfomant_Example' do
   pod 'YYCategories'  #功能丰富的 Category 类型工具库
   pod 'Masonry'
   pod 'MJRefresh'
- # pod 'AFNetworking'
   pod 'SDWebImage'
   pod 'pop'
   pod 'MJExtension'
+  pod 'MGJRouter'
+  pod 'AFNetworking'
   
   target 'BeiJingDailyInfomant_Tests' do
     inherit! :search_paths

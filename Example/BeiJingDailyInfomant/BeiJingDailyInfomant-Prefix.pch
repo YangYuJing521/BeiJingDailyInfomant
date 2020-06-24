@@ -20,4 +20,6 @@
 #import "baseCellAndViews.h"
 #import "YYCategories.h"
 #import "Masonry.h"
+#import "MGJRouter.h"
+#import "BDConfigs.h"
 #endif

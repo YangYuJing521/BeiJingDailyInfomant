@@ -10,12 +10,14 @@
 #import "BDMeHeadView.h"
 #import "BDInfomantMainVC.h"
 #import "BDMeTopFourCell.h"
+#import "BDMeBaoLiaoReusableView.h"
 
 static double const HEADHEIGHT = 80;
 static NSString *const BDMeTopFourCellID = @"BDMeTopFourCellID";
+static NSString *const BDMeBaoLiaoReusableViewID = @"BDMeBaoLiaoReusableViewID";
 
 @interface BDMeViewController ()
-<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,TemplateBaseCellCellDelegate>
+<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,TemplateBaseCellCellDelegate,TemplateBaseReusableViewDelegate>
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) BDMeHeadView *personHeadView;
 @end
@@ -36,12 +38,12 @@ static NSString *const BDMeTopFourCellID = @"BDMeTopFourCellID";
 
 #pragma mark collectionView datasource
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 1;
+    return 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (section == 0) return 4;
-    return 1;
+    return 0;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -54,8 +56,24 @@ static NSString *const BDMeTopFourCellID = @"BDMeTopFourCellID";
     gridCell.indexPath = indexPath;
     return gridCell;
 }
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    TemplateBaseReusableView *gridView = nil;
+    if (indexPath.section==1) {
+        BDMeBaoLiaoReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BDMeBaoLiaoReusableViewID forIndexPath:indexPath];
+        gridView = header;
+    }
+    gridView.delegate = self;
+    gridView.indexPath = indexPath;
+    return gridView;
+}
+//item
 -(CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     return CGSizeMake(ScreenW/4, 81 * kWidthRatio);
+}
+//head
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    if (section==1) return CGSizeMake(ScreenW, 98*kWidthRatio);
+    return CGSizeZero;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -63,9 +81,12 @@ static NSString *const BDMeTopFourCellID = @"BDMeTopFourCellID";
 }
 
 #pragma mark cell Delegate
--(void)contentViewDidClickWithType:(NSString *)type contentData:(id)contentData indexPath:(NSIndexPath *)indexPath index:(NSInteger)index{
-    
+-(void)contentViewDidClickWithType:(NSString *)type contentData:(id)contentData indexPath:(NSIndexPath *)indexPath index:(NSInteger)index{}
+
+-(void)reuseableViewDidClickWithType:(NSString *)type contentData:(id)contentData indexPath:(NSIndexPath *)indexPath index:(NSInteger)index{
+    [MGJRouter openURL:BAOLIAOROUTER withUserInfo:@{@"navigationVC" : self.navigationController,} completion:nil];
 }
+
 #pragma mark layout
 //y
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
@@ -78,7 +99,7 @@ static NSString *const BDMeTopFourCellID = @"BDMeTopFourCellID";
 }
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(10, 0, 0, 0);
+    return UIEdgeInsetsMake(10, 0, 10, 0);
 }
 
 #pragma mark 滑动
@@ -109,6 +130,8 @@ static NSString *const BDMeTopFourCellID = @"BDMeTopFourCellID";
         _collectionView = [UICollectionView addCollectionViewDelegate:self SupView:self.view];
         _collectionView.alwaysBounceVertical = YES;  // 垂直
         [_collectionView registerClass:[BDMeTopFourCell class] forCellWithReuseIdentifier:BDMeTopFourCellID];
+        [_collectionView registerClass:[BDMeBaoLiaoReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                   withReuseIdentifier:BDMeBaoLiaoReusableViewID];
         _collectionView.contentInset = UIEdgeInsetsMake(topBackHeight, 0, 0, 0);
         [_collectionView addSubview:self.personHeadView];
         [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {

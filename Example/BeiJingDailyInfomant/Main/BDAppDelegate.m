@@ -8,6 +8,7 @@
 
 #import "BDAppDelegate.h"
 #import "BDTabbarController.h"
+#import "BDAppDelegate+Category.h"
 @implementation BDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -16,7 +17,9 @@
     self.window = [[UIWindow alloc] initWithFrame: [UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    self.window.rootViewController =  [NSClassFromString(@"BDTabbarController") new];;
+    self.window.rootViewController =  [NSClassFromString(@"BDTabbarController") new];
+    //配置路由
+    [self registSchemes];
     return YES;
     
 }
