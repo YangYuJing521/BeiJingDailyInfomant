@@ -10,11 +10,11 @@ target 'BeiJingDailyInfomant_Example' do
   pod 'YJUsefulUIKit', '~> 1.0.1'
   
   pod 'YYCategories'  #功能丰富的 Category 类型工具库
-  pod 'Masonry'
+  #pod 'Masonry'
   pod 'MJRefresh'
   pod 'SDWebImage'
   pod 'pop'
-  pod 'MJExtension'
+  #pod 'MJExtension'
   pod 'MGJRouter'
   pod 'AFNetworking'
   

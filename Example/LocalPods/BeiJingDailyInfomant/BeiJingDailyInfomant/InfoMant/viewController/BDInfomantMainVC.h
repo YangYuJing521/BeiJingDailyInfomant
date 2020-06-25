@@ -6,10 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "YJBaseController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BDInfomantMainVC : UIViewController
+@interface BDInfomantMainVC :YJBaseController
 
 @end
 

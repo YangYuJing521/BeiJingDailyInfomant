@@ -18,5 +18,22 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "**/*.{h,m}"
+  "source_files": "**/*.{h,m}",
+  "resource_bundles": {
+    "BeiJingDailyInfomant": [
+      "BeiJingDailyInfomant/Assets/*.png"
+    ]
+  },
+  "prefix_header_file": "PrefixHeader.pch",
+  "dependencies": {
+    "YJUsefulUIKit": [
+
+    ],
+    "MJExtension": [
+
+    ],
+    "Masonry": [
+
+    ]
+  }
 }

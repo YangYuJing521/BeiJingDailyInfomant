@@ -10,7 +10,10 @@
 #endif
 #endif
 
+#import "ReadJsonHandler.h"
+#import "BaoLiaoTypeModel.h"
 #import "BDInfomantMainVC.h"
+#import "BDBaoLiaoTypeCell.h"
 
 FOUNDATION_EXPORT double BeiJingDailyInfomantVersionNumber;
 FOUNDATION_EXPORT const unsigned char BeiJingDailyInfomantVersionString[];

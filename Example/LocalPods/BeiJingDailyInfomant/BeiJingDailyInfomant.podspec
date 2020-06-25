@@ -32,11 +32,15 @@ TODO: Add long description of the pod here.
 
   s.source_files = '**/*.{h,m}'
   
-  # s.resource_bundles = {
-  #   'BeiJingDailyInfomant' => ['BeiJingDailyInfomant/Assets/*.png']
-  # }
-
+  s.resource_bundles = {
+    'BeiJingDailyInfomant' => ['BeiJingDailyInfomant/Assets/*.png']
+  }
+  #s.prefix_header_contents = '#import YJUsefulUIKit.h', '#import MJExtension.h'
+  s.prefix_header_file = false
+  s.prefix_header_file = 'PrefixHeader.pch'
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'YJUsefulUIKit'
+  s.dependency 'MJExtension'
+  s.dependency 'Masonry'
 end

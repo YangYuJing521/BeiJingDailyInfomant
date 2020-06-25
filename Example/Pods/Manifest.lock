@@ -14,7 +14,10 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - BeiJingDailyInfomant (0.1.0)
+  - BeiJingDailyInfomant (0.1.0):
+    - Masonry
+    - MJExtension
+    - YJUsefulUIKit
   - Masonry (1.1.0)
   - MGJRouter (0.10.0)
   - MJExtension (3.2.1)
@@ -58,9 +61,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - BeiJingDailyInfomant (from `./LocalPods/BeiJingDailyInfomant`)
-  - Masonry
   - MGJRouter
-  - MJExtension
   - MJRefresh
   - pop
   - SDWebImage
@@ -85,7 +86,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  BeiJingDailyInfomant: a6ddf6cadf72678144a6f75acb80d73ff78d43e1
+  BeiJingDailyInfomant: e2a04cd0a73321eb0e51958a7273d716dc4c4d8d
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MGJRouter: 15d94541eb2cc81eff7d577337288feb7ae9575f
   MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
@@ -95,6 +96,6 @@ SPEC CHECKSUMS:
   YJUsefulUIKit: 6edce3d9f15fa12e43fc512aedfde0ffe48fa49b
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: c39cc52b489328e8d37c65840ff04c3a64dc201e
+PODFILE CHECKSUM: cab9d9ab2b789c3d390cd944be1be3e41c2b653b
 
 COCOAPODS: 1.9.3
