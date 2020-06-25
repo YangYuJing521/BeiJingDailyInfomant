@@ -10,10 +10,13 @@
 #endif
 #endif
 
+#import "BDConfigs.h"
 #import "ReadJsonHandler.h"
 #import "BaoLiaoTypeModel.h"
+#import "BDInfomantCommitController.h"
 #import "BDInfomantMainVC.h"
 #import "BDBaoLiaoTypeCell.h"
+#import "BDInfomantCommitTitleCell.h"
 
 FOUNDATION_EXPORT double BeiJingDailyInfomantVersionNumber;
 FOUNDATION_EXPORT const unsigned char BeiJingDailyInfomantVersionString[];

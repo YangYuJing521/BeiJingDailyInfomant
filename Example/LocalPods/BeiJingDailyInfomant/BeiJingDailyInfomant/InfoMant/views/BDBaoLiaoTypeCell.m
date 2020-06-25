@@ -44,7 +44,7 @@
     self.participateLabel = [UILabel addLabelWithtitle:@"" titleColor:GMGrayTextColor153 font:PFR12Font];
     [self.contentView addSubview:self.participateLabel];
     
-    self.goNowLabel = [UILabel addLabelWithtitle:@"立刻爆料" titleColor:[UIColor blueColor] font:PFR14Font];
+    self.goNowLabel = [UILabel addLabelWithtitle:@"立刻爆料 >" titleColor:GMBlueTextColor27_132_246 font:PFR14Font];
     self.goNowLabel.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:self.goNowLabel];
     

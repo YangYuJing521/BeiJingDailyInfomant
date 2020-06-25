@@ -9,5 +9,6 @@
 #import "BDConfigs.h"
 
 @implementation BDConfigs
-NSString *const BAOLIAOROUTER = @"BD://Me/BaoLiao/listType";
+NSString *const BAOLIAOLISTROUTER = @"BD://Me/BaoLiao/listType";
+NSString *const BAOLIAOCOMMITROUTER = @"BD://Me/BaoLiao/commit";
 @end

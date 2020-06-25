@@ -43,4 +43,5 @@ TODO: Add long description of the pod here.
   s.dependency 'YJUsefulUIKit'
   s.dependency 'MJExtension'
   s.dependency 'Masonry'
+  s.dependency 'MGJRouter'
 end

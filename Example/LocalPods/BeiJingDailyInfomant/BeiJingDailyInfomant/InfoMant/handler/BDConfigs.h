@@ -19,7 +19,9 @@ typedef NS_ENUM(NSInteger, BDTabBarType) {
 
 
 @interface BDConfigs : NSObject
-extern NSString *const BAOLIAOROUTER;  //爆料类型选择
+extern NSString *const BAOLIAOLISTROUTER;  //爆料类型选择
+extern NSString *const BAOLIAOCOMMITROUTER;  //爆料提交
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,6 +9,7 @@
 #import "ReadJsonHandler.h"
 #import "BaoLiaoTypeModel.h"
 #import "BDBaoLiaoTypeCell.h"
+#import "BDConfigs.h"
 
 static NSString *const BDBaoLiaoTypeCellID = @"BDBaoLiaoTypeCellID";
 
@@ -24,7 +25,7 @@ static NSString *const BDBaoLiaoTypeCellID = @"BDBaoLiaoTypeCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"爆料话题";
-    self.view.backgroundColor = GMBGGrayColor240;
+    self.view.backgroundColor = GMBGColor255;
     self.heightAtIndexPath = [NSMutableDictionary dictionary];
     //获取数据
     WEAKSELF
@@ -47,6 +48,8 @@ static NSString *const BDBaoLiaoTypeCellID = @"BDBaoLiaoTypeCellID";
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [MGJRouter openURL:BAOLIAOCOMMITROUTER withUserInfo:@{@"navigationVC" : self.navigationController,
+                                                        @"dataModel" : self.dataArray[indexPath.row]} completion:nil];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *height = [self.heightAtIndexPath objectForKey2:[NSString stringWithFormat:@"%zd",indexPath.row]];
@@ -60,13 +63,11 @@ static NSString *const BDBaoLiaoTypeCellID = @"BDBaoLiaoTypeCellID";
 #pragma mark lazy load
 -(UITableView *)tableView{
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH-kStatusBarAndNavigationBarHeight)];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH-kStatusBarAndNavigationBarHeight-kTabbarSafeBottomMargin)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.estimatedRowHeight = 150;
-        _tableView.rowHeight = 44;
-        _tableView.rowHeight = UITableViewAutomaticDimension;  //自动布局
         self.edgesForExtendedLayout = UIRectEdgeNone;
         [self.view addSubview:_tableView];
         

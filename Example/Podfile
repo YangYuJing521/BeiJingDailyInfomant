@@ -15,7 +15,7 @@ target 'BeiJingDailyInfomant_Example' do
   pod 'SDWebImage'
   pod 'pop'
   #pod 'MJExtension'
-  pod 'MGJRouter'
+  #pod 'MGJRouter'
   pod 'AFNetworking'
   
   target 'BeiJingDailyInfomant_Tests' do

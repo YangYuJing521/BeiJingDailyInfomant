@@ -84,7 +84,7 @@ static NSString *const BDMeBaoLiaoReusableViewID = @"BDMeBaoLiaoReusableViewID";
 -(void)contentViewDidClickWithType:(NSString *)type contentData:(id)contentData indexPath:(NSIndexPath *)indexPath index:(NSInteger)index{}
 
 -(void)reuseableViewDidClickWithType:(NSString *)type contentData:(id)contentData indexPath:(NSIndexPath *)indexPath index:(NSInteger)index{
-    [MGJRouter openURL:BAOLIAOROUTER withUserInfo:@{@"navigationVC" : self.navigationController,} completion:nil];
+    [MGJRouter openURL:BAOLIAOLISTROUTER withUserInfo:@{@"navigationVC" : self.navigationController,} completion:nil];
 }
 
 #pragma mark layout
