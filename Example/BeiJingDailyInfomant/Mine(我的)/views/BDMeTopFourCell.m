@@ -35,7 +35,6 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    
     [_iconImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView);
         make.bottom.equalTo(self.titleLabel.mas_top).offset(-7.5*kWidthRatio);
@@ -45,8 +44,6 @@
         make.height.mas_equalTo(@(17 * kWidthRatio));
         make.bottom.equalTo(self.contentView.mas_bottom).offset(-15*kWidthRatio);
     }];
-    
-
 }
 
 @end

@@ -17,13 +17,10 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-//    NSDate * date = [NSDate date];
-//    NSLog(@"结束时间***%@",date);
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.delegate = self;
     //解决iOS13 变蓝问题
     if (@available(iOS 13.0, *)){
@@ -147,7 +144,6 @@
             [imageView.layer addAnimation:animation forKey:nil];
         }
     }
-    
 }
 
 #pragma mark - 移除通知
@@ -157,7 +153,6 @@
 
 #pragma mark - LazyLoad
 - (NSMutableArray *)tabBarItems {
-    
     if (_tabBarItems == nil) {
         _tabBarItems = [NSMutableArray array];
     }

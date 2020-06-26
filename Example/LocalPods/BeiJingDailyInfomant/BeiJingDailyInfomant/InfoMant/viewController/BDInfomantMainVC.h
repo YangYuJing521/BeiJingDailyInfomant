@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BDInfomantMainVC :YJBaseController
-
+@property (nonatomic, strong) NSNumber *isFromCommit;   //是否是提交页选择type
 @end
 
 NS_ASSUME_NONNULL_END

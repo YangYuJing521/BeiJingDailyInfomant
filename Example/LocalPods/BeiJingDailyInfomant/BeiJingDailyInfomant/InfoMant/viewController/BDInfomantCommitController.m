@@ -7,22 +7,24 @@
 
 #import "BDInfomantCommitController.h"
 #import "BDInfomantCommitTitleCell.h"
-
+#import "BDConfigs.h"
 static NSString *const BDInfomantCommitTitleCellID = @"BDInfomantCommitTitleCell";
 static NSString *const BDInfomantCommitDesCellID = @"BDInfomantCommitDesCellID";
 static NSString *const BDInfomantCommitPicCellID = @"BDInfomantCommitPicCellID";
+static NSString *const BDInfomantSelectTopicCellID = @"BDInfomantSelectTopicCellID";
+static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTelePhoneCellID";
 
 @interface BDInfomantCommitController ()
 <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextFieldDelegate,UITextViewDelegate,TemplateBaseCellCellDelegate>
 @property (nonatomic, strong) UICollectionView *collectionView;
-
 @property (nonatomic, weak) UITextField *textField;
 @property (nonatomic, weak) UITextView *textView;
+@property (nonatomic, weak) UITextField *phoneField;
 @end
 
 @implementation BDInfomantCommitController
 {
-    CGFloat itemWH;
+    CGFloat itemWH;  //item 宽高
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,14 +35,15 @@ static NSString *const BDInfomantCommitPicCellID = @"BDInfomantCommitPicCellID";
 
 -(void)setDataModel:(BaoLiaoTypeModel *)dataModel{
     _dataModel = dataModel;
+    [self.collectionView reloadData];
 }
-
 #pragma mark collectionView
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 3;
+    return 5;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    if (section == 2) return 5;
     return 1;
 }
 
@@ -62,38 +65,38 @@ static NSString *const BDInfomantCommitPicCellID = @"BDInfomantCommitPicCellID";
         BDInfomantCommitPicCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:BDInfomantCommitPicCellID forIndexPath:indexPath];
         gridCell = cell;
     }
-    
+    if (indexPath.section==3) {
+        BDInfomantSelectTopicCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:BDInfomantSelectTopicCellID forIndexPath:indexPath];
+        cell.model = self.dataModel;
+        gridCell = cell;
+    }
+    if (indexPath.section==4) {
+        BDInfomantSelectTelePhoneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:BDInfomantSelectTelePhoneCellID forIndexPath:indexPath];
+        self.phoneField = cell.phoneField;
+        gridCell = cell;
+    }
     gridCell.delegate = self;
     gridCell.indexPath = indexPath;
     return gridCell;
 }
--(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    YJTemplateBaseReusableView *gridView = nil;
-//    if (indexPath.section==1) {
-//        BDMeBaoLiaoReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:BDMeBaoLiaoReusableViewID forIndexPath:indexPath];
-//        gridView = header;
-//    }
-    gridView.delegate = self;
-    gridView.indexPath = indexPath;
-    return gridView;
-}
-//item
 -(CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section==0) return CGSizeMake(ScreenW, 44 * kWidthRatio);
-    if (indexPath.section==1) return CGSizeMake(ScreenW, 180 * kWidthRatio);
-    if (indexPath.section==2) return CGSizeMake(itemWH, itemWH);
-        
+    if (indexPath.section == 0) return CGSizeMake(ScreenW, 44 * kWidthRatio);
+    if (indexPath.section == 1) return CGSizeMake(ScreenW, 180 * kWidthRatio);
+    if (indexPath.section == 2) return CGSizeMake(itemWH, itemWH);
+    if (indexPath.section == 3) return CGSizeMake(ScreenW, 44 * kWidthRatio);
+    if (indexPath.section == 4) return CGSizeMake(ScreenW, 44 * kWidthRatio);
     return CGSizeZero;
 }
 //head
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    return CGSizeZero;
-}
-
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if (indexPath.section==3) {
+        // 选择类型
+        [MGJRouter openURL:BAOLIAOLISTROUTER withUserInfo:@{@"navigationVC" : self.navigationController,
+        @"isFromCommit" : @1} completion:nil];
+    }
 }
 
+#pragma mark cell delegate
 -(void)contentViewDidClickWithType:(NSString *)type contentData:(id)contentData indexPath:(NSIndexPath *)indexPath index:(NSInteger)index{
     NSLog(@"%zd",index);
 }
@@ -101,21 +104,18 @@ static NSString *const BDInfomantCommitPicCellID = @"BDInfomantCommitPicCellID";
 #pragma mark layout
 //y
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    if (section == 2) return  10*kWidthRatio;
     return 0;
 }
-
-//x
--(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return 0;
-}
-
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(0, 0, 0, 0);
+    if (section == 2) return UIEdgeInsetsMake(0, 15*kWidthRatio, 0, 15*kWidthRatio);
+    if (section == 3) return UIEdgeInsetsMake(35*kWidthRatio, 0, 0, 0);
+    return UIEdgeInsetsZero;
 }
-
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.textField resignFirstResponder];
     [self.textView resignFirstResponder];
+    [self.phoneField resignFirstResponder];
 }
 
 #pragma mark uitextField
@@ -126,16 +126,15 @@ static NSString *const BDInfomantCommitPicCellID = @"BDInfomantCommitPicCellID";
 
 #pragma mark uitextview
 -(void)textViewDidBeginEditing:(UITextView *)textView{
-    if ([TO_STR(textView.text) isEqualToString:@"详细描述（时间、地点、人物、事件）"]) {
+    if ([TO_STR(textView.text) isEqualToString: @"详细描述（时间、地点、人物、事件）"]) {
         textView.text = @"";
         self.textView.textColor = GMBlackTextColor51;
     }
 }
-
 -(void)textViewDidEndEditing:(UITextView *)textView{
     if (TO_STR(textView.text).length == 0){
         self.textView.textColor = GMGrayTextColor153;
-        self.textView.text = @"详细描述（时间、地点、人物、事件）";
+        self.textView.text =  @"详细描述（时间、地点、人物、事件）";
     }else{
         self.textView.textColor = GMBlackTextColor51;
     }
@@ -162,15 +161,10 @@ static NSString *const BDInfomantCommitPicCellID = @"BDInfomantCommitPicCellID";
         [_collectionView registerClass:[BDInfomantCommitTitleCell class] forCellWithReuseIdentifier:BDInfomantCommitTitleCellID];
         [_collectionView registerClass:[BDInfomantCommitDesCell class] forCellWithReuseIdentifier:BDInfomantCommitDesCellID];
         [_collectionView registerClass:[BDInfomantCommitPicCell class] forCellWithReuseIdentifier:BDInfomantCommitPicCellID];
+        [_collectionView registerClass:[BDInfomantSelectTopicCell class] forCellWithReuseIdentifier:BDInfomantSelectTopicCellID];
+        [_collectionView registerClass:[BDInfomantSelectTelePhoneCell class] forCellWithReuseIdentifier:BDInfomantSelectTelePhoneCellID];
         [self.view addSubview:_collectionView];
-    
-//        [_collectionView registerClass:[BDMeBaoLiaoReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-//                   withReuseIdentifier:BDMeBaoLiaoReusableViewID];
-//        [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.right.top.equalTo(self.view).offset(0);
-//            make.height.mas_equalTo(ScreenH-kTabbarHeight);
-//        }];
-    }
+        }
     return _collectionView;
 }
 
@@ -185,6 +179,6 @@ static NSString *const BDInfomantCommitPicCellID = @"BDInfomantCommitPicCellID";
 -(void)rightBarButtonItemClick{
     NSLog(@"%@",self.textField.text);
     NSLog(@"%@",self.textView.text);
-
+    NSLog(@"%@",self.phoneField.text);
 }
 @end

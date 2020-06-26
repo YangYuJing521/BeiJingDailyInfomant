@@ -9,6 +9,7 @@
 #import "BaoLiaoTypeModel.h"
 
 @interface BDInfomantCommitController : YJBaseController
+// 数据模型，展示类型
 @property (nonatomic, strong) BaoLiaoTypeModel *dataModel;
 @end
 

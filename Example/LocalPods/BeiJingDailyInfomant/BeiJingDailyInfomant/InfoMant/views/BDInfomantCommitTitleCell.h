@@ -6,7 +6,7 @@
 //
 
 #import <YJUsefulUIKit/YJUsefulUIKit.h>
-
+#import "BaoLiaoTypeModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 // title
@@ -23,5 +23,16 @@ NS_ASSUME_NONNULL_BEGIN
 // 添加视频图片
 @interface BDInfomantCommitPicCell : YJTemplateBaseCell
 
+@end
+
+// 选择话题
+@interface BDInfomantSelectTopicCell : YJTemplateBaseCell
+@property (nonatomic, strong) UILabel *topicLabel;
+@property (nonatomic, strong) BaoLiaoTypeModel *model;
+@end
+
+// 电话号码
+@interface BDInfomantSelectTelePhoneCell : YJTemplateBaseCell
+@property (nonatomic, strong) UITextField *phoneField;
 @end
 NS_ASSUME_NONNULL_END

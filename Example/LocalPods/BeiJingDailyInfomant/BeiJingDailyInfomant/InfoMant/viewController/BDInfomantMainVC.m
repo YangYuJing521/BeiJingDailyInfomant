@@ -49,7 +49,8 @@ static NSString *const BDBaoLiaoTypeCellID = @"BDBaoLiaoTypeCellID";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [MGJRouter openURL:BAOLIAOCOMMITROUTER withUserInfo:@{@"navigationVC" : self.navigationController,
-                                                        @"dataModel" : self.dataArray[indexPath.row]} completion:nil];
+                                                             @"dataModel" : self.dataArray[indexPath.row],
+                                                          @"isFromCommit" : self.isFromCommit} completion:nil];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *height = [self.heightAtIndexPath objectForKey2:[NSString stringWithFormat:@"%zd",indexPath.row]];
@@ -63,14 +64,15 @@ static NSString *const BDBaoLiaoTypeCellID = @"BDBaoLiaoTypeCellID";
 #pragma mark lazy load
 -(UITableView *)tableView{
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH-kStatusBarAndNavigationBarHeight-kTabbarSafeBottomMargin)];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kStatusBarAndNavigationBarHeight, ScreenW, ScreenH-kStatusBarAndNavigationBarHeight-kTabbarSafeBottomMargin)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.estimatedRowHeight = 150;
-        self.edgesForExtendedLayout = UIRectEdgeNone;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAlways;
+        }
         [self.view addSubview:_tableView];
-        
     }
     return _tableView;
 }

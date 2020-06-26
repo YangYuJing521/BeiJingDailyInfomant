@@ -317,6 +317,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = silverBullet;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = 56NGMCS5S7;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -588,13 +591,15 @@
 			baseConfigurationReference = 8AF941461D817FC5C1D2B16A /* Pods-BeiJingDailyInfomant_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 56NGMCS5S7;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeiJingDailyInfomant/BeiJingDailyInfomant-Prefix.pch";
 				INFOPLIST_FILE = "BeiJingDailyInfomant/BeiJingDailyInfomant-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yyj.develop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -604,13 +609,15 @@
 			baseConfigurationReference = A50507072EE596FF0DACBEAC /* Pods-BeiJingDailyInfomant_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 56NGMCS5S7;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BeiJingDailyInfomant/BeiJingDailyInfomant-Prefix.pch";
 				INFOPLIST_FILE = "BeiJingDailyInfomant/BeiJingDailyInfomant-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yyj.develop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

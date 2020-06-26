@@ -84,10 +84,11 @@
     [self.sepLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.participateLabel.mas_bottom).offset(15);
         make.left.equalTo(self.mas_left).offset(15);
-        make.right.equalTo(self.mas_right).offset(-15);
+        make.width.mas_equalTo(ScreenW-30);
         make.height.mas_equalTo(0.5);
     }];
     
+    //cell 高度自适应
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self);
         make.bottom.mas_equalTo(self.sepLine.mas_bottom);
@@ -98,7 +99,7 @@
 -(void)setModel:(BaoLiaoTypeModel *)model{
     _model = model;
     //title
-    NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:model.title];
+    NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",model.title]];
     NSDictionary *attdic = @{
         NSFontAttributeName:PFR18Font,
         NSForegroundColorAttributeName:GMBlackTextColor51
