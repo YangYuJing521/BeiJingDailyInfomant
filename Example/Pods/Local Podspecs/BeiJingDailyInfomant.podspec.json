@@ -25,6 +25,10 @@
     ]
   },
   "prefix_header_file": "PrefixHeader.pch",
+  "frameworks": [
+    "MobileCoreServices",
+    "Photos"
+  ],
   "dependencies": {
     "YJUsefulUIKit": [
 
@@ -37,6 +41,9 @@
     ],
     "MGJRouter": [
 
+    ],
+    "TZImagePickerController": [
+      "~> 3.3.2"
     ]
   }
 }

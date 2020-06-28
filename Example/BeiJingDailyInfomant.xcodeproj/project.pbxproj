@@ -49,6 +49,9 @@
 		496999E324A391CD00C398A8 /* BDTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDTestViewController.h; sourceTree = "<group>"; };
 		496999E424A391CD00C398A8 /* BDTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDTestViewController.m; sourceTree = "<group>"; };
 		496999E624A47ED500C398A8 /* BaoLiaoTypes.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; name = BaoLiaoTypes.geojson; path = ../../../../Documents/BaoLiaoTypes.geojson; sourceTree = "<group>"; };
+		497F256024A8955200F5A0AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		497F256124A8955200F5A0AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		497F256224A8955200F5A0AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		49DDE22D249F69D2001C0643 /* BJHao.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = BJHao.geojson; sourceTree = "<group>"; };
 		49DDE26124A09C04001C0643 /* BDTabbarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDTabbarController.h; sourceTree = "<group>"; };
 		49DDE26224A09C04001C0643 /* BDTabbarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDTabbarController.m; sourceTree = "<group>"; };
@@ -333,6 +336,7 @@
 				English,
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 6003F581195388D10070C39A;
 			productRefGroup = 6003F58B195388D20070C39A /* Products */;
@@ -426,6 +430,7 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
 				"${BUILT_PRODUCTS_DIR}/YJUsefulUIKit/YJUsefulUIKit.framework",
 				"${BUILT_PRODUCTS_DIR}/YYCategories/YYCategories.framework",
 			);
@@ -438,6 +443,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YJUsefulUIKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCategories.framework",
 			);
@@ -488,6 +494,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6003F597195388D20070C39A /* en */,
+				497F256124A8955200F5A0AD /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -496,6 +503,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6003F5B9195388D20070C39A /* en */,
+				497F256224A8955200F5A0AD /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -504,6 +512,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				71719F9E1E33DC2100824A3D /* Base */,
+				497F256024A8955200F5A0AD /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

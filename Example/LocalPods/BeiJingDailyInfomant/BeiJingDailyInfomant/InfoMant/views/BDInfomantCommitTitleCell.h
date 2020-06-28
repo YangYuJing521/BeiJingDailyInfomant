@@ -22,7 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 添加视频图片
 @interface BDInfomantCommitPicCell : YJTemplateBaseCell
-
+@property (nonatomic, strong) UIImageView *iconImage;
+@property (nonatomic, strong) UIImageView *delBtn;
+@property (nonatomic, strong) UIImageView *videoImage;
+@property (nonatomic, strong) id asset;
 @end
 
 // 选择话题

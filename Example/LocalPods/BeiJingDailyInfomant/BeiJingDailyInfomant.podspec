@@ -39,9 +39,10 @@ TODO: Add long description of the pod here.
   s.prefix_header_file = false
   s.prefix_header_file = 'PrefixHeader.pch'
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.frameworks = 'MobileCoreServices', 'Photos'
   s.dependency 'YJUsefulUIKit'
   s.dependency 'MJExtension'
   s.dependency 'Masonry'
   s.dependency 'MGJRouter'
+  s.dependency 'TZImagePickerController', '~> 3.3.2'
 end

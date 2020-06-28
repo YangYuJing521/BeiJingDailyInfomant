@@ -18,6 +18,7 @@ PODS:
     - Masonry
     - MGJRouter
     - MJExtension
+    - TZImagePickerController (~> 3.3.2)
     - YJUsefulUIKit
   - Masonry (1.1.0)
   - MGJRouter (0.10.0)
@@ -26,6 +27,7 @@ PODS:
   - SDWebImage (5.8.1):
     - SDWebImage/Core (= 5.8.1)
   - SDWebImage/Core (5.8.1)
+  - TZImagePickerController (3.3.2)
   - YJUsefulUIKit (1.0.1):
     - YJUsefulUIKit/YJBaseCells (= 1.0.1)
     - YJUsefulUIKit/YJBasicDepand (= 1.0.1)
@@ -73,6 +75,7 @@ SPEC REPOS:
     - MJExtension
     - MJRefresh
     - SDWebImage
+    - TZImagePickerController
     - YJUsefulUIKit
     - YYCategories
 
@@ -82,12 +85,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  BeiJingDailyInfomant: fdc23514032d5fa573a83fae38cfc54dcd44a25e
+  BeiJingDailyInfomant: b9fbdc34fdb992ce634ce5489d55d8e958170279
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MGJRouter: 15d94541eb2cc81eff7d577337288feb7ae9575f
   MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
   MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
   SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
+  TZImagePickerController: 36ca728ec681228918aa82e993aaab1962281b72
   YJUsefulUIKit: 6edce3d9f15fa12e43fc512aedfde0ffe48fa49b
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 

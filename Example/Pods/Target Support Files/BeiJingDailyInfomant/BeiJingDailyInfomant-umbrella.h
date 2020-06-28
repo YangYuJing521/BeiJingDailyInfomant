@@ -17,6 +17,7 @@
 #import "BDInfomantMainVC.h"
 #import "BDBaoLiaoTypeCell.h"
 #import "BDInfomantCommitTitleCell.h"
+#import "BDInfomantSelectResourceVC.h"
 
 FOUNDATION_EXPORT double BeiJingDailyInfomantVersionNumber;
 FOUNDATION_EXPORT const unsigned char BeiJingDailyInfomantVersionString[];

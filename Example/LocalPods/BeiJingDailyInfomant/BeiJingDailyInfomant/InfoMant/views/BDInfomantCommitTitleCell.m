@@ -7,6 +7,8 @@
 
 #import "BDInfomantCommitTitleCell.h"
 #import "YJPodUtil.h"
+#import <Photos/Photos.h>
+
 // ------------------  title  ------------------
 @implementation BDInfomantCommitTitleCell
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -62,28 +64,57 @@
 
 // ------------------  添加视频图片  ------------------
 @interface BDInfomantCommitPicCell()
-@property (nonatomic, strong) UIImageView *iconImage;
 @end
 @implementation BDInfomantCommitPicCell
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+        UIView *content = [[UIView alloc] initWithFrame:self.bounds];
+        [YJUITools viewWithCorner:content cornerRadius:5.0f];
+        content.backgroundColor =GMBGColor255;
+        [self addSubview:content];
+        
         self.iconImage = [[UIImageView alloc] init];
-        UIImage *image2 = [UIImage imageNamed:@"add_pic_and_video" inBundle:[YJPodUtil bundleForPod:@"BeiJingDailyInfomant"] compatibleWithTraitCollection:nil];
-        self.iconImage.image = image2;
-        self.iconImage.userInteractionEnabled = YES;
         [self addSubview:self.iconImage];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(SelectPictureOrVideo)];
-        [self.iconImage addGestureRecognizer:tap];
         [self.iconImage mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self);
+            make.edges.equalTo(content);
         }];
+        [content addSubview:self.iconImage];
+        
+        self.delBtn = [[UIImageView alloc] init];
+        self.delBtn.userInteractionEnabled = YES;
+        UIImage *image = [UIImage imageNamed:@"photo_delete" inBundle:[YJPodUtil bundleForPod:@"BeiJingDailyInfomant"] compatibleWithTraitCollection:nil];
+        self.delBtn.image = image;
+        [content addSubview:self.delBtn];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deletePictureOrVideo)];
+        [self.delBtn addGestureRecognizer:tap];
+        [self.delBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.right.equalTo(content);
+            make.width.height.mas_equalTo(26);
+        }];
+        
+        self.videoImage = [[UIImageView alloc] init];
+        UIImage *image2 = [UIImage imageNamed:@"play_outline_filled" inBundle:[YJPodUtil bundleForPod:@"BeiJingDailyInfomant"] compatibleWithTraitCollection:nil];
+        self.videoImage.image = image2;
+        self.videoImage.hidden = YES;
+        [content addSubview:self.videoImage];
+        [self.videoImage mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo(24);
+            make.centerX.mas_equalTo(content.mas_centerX);
+            make.centerY.mas_equalTo(content.mas_centerY);
+        }];
+
     }
     return self;
 }
--(void)SelectPictureOrVideo{
+-(void)deletePictureOrVideo{
     if ([self.delegate respondsToSelector:@selector(contentViewDidClickWithType:contentData:indexPath:index:)]) {
         [self.delegate contentViewDidClickWithType:@"" contentData:nil indexPath:self.indexPath index:self.indexPath.item];
     }
+}
+
+- (void)setAsset:(PHAsset *)asset {
+    _asset = asset;
+    self.videoImage.hidden = asset.mediaType != PHAssetMediaTypeVideo;
 }
 
 @end
