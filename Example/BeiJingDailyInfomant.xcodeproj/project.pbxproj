@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4968226724A7355F002F1067 /* BDBJHMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4968226624A7355F002F1067 /* BDBJHMainController.m */; };
+		4968226B24A75807002F1067 /* BDDefineScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4968226A24A75807002F1067 /* BDDefineScrollView.m */; };
+		4968226E24A76895002F1067 /* BDSegmentItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4968226D24A76895002F1067 /* BDSegmentItemView.m */; };
+		4968227124A769C4002F1067 /* BDBJHListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4968227024A769C4002F1067 /* BDBJHListController.m */; };
+		4968227424A76B30002F1067 /* UIViewController+BDScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 4968227324A76B30002F1067 /* UIViewController+BDScroll.m */; };
 		496999E524A391CD00C398A8 /* BDTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 496999E424A391CD00C398A8 /* BDTestViewController.m */; };
 		496999E724A47ED500C398A8 /* BaoLiaoTypes.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 496999E624A47ED500C398A8 /* BaoLiaoTypes.geojson */; };
+		497F256524A9976F00F5A0AD /* BDBJHNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 497F256424A9976F00F5A0AD /* BDBJHNewsCell.m */; };
 		49DDE26324A09C04001C0643 /* BDTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DDE26224A09C04001C0643 /* BDTabbarController.m */; };
 		49DDE26F24A0D7C3001C0643 /* BDMeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DDE26E24A0D7C3001C0643 /* BDMeHeadView.m */; };
 		49DDE27E24A1EBC0001C0643 /* BDMeTopFourCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DDE27D24A1EBC0001C0643 /* BDMeTopFourCell.m */; };
@@ -46,9 +52,21 @@
 		2621219264EEBCDDDF4131F3 /* Pods-BeiJingDailyInfomant_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeiJingDailyInfomant_Tests.debug.xcconfig"; path = "Target Support Files/Pods-BeiJingDailyInfomant_Tests/Pods-BeiJingDailyInfomant_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		2E271A2771E218C15864C672 /* Pods-BeiJingDailyInfomant_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeiJingDailyInfomant_Tests.release.xcconfig"; path = "Target Support Files/Pods-BeiJingDailyInfomant_Tests/Pods-BeiJingDailyInfomant_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		46D4349AFD9FDCC4F995E9CF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		4968226524A7355F002F1067 /* BDBJHMainController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDBJHMainController.h; sourceTree = "<group>"; };
+		4968226624A7355F002F1067 /* BDBJHMainController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDBJHMainController.m; sourceTree = "<group>"; };
+		4968226924A75807002F1067 /* BDDefineScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDDefineScrollView.h; sourceTree = "<group>"; };
+		4968226A24A75807002F1067 /* BDDefineScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDDefineScrollView.m; sourceTree = "<group>"; };
+		4968226C24A76895002F1067 /* BDSegmentItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDSegmentItemView.h; sourceTree = "<group>"; };
+		4968226D24A76895002F1067 /* BDSegmentItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDSegmentItemView.m; sourceTree = "<group>"; };
+		4968226F24A769C4002F1067 /* BDBJHListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDBJHListController.h; sourceTree = "<group>"; };
+		4968227024A769C4002F1067 /* BDBJHListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDBJHListController.m; sourceTree = "<group>"; };
+		4968227224A76B30002F1067 /* UIViewController+BDScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BDScroll.h"; sourceTree = "<group>"; };
+		4968227324A76B30002F1067 /* UIViewController+BDScroll.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BDScroll.m"; sourceTree = "<group>"; };
 		496999E324A391CD00C398A8 /* BDTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDTestViewController.h; sourceTree = "<group>"; };
 		496999E424A391CD00C398A8 /* BDTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDTestViewController.m; sourceTree = "<group>"; };
 		496999E624A47ED500C398A8 /* BaoLiaoTypes.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; name = BaoLiaoTypes.geojson; path = ../../../../Documents/BaoLiaoTypes.geojson; sourceTree = "<group>"; };
+		497F256324A9976F00F5A0AD /* BDBJHNewsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDBJHNewsCell.h; sourceTree = "<group>"; };
+		497F256424A9976F00F5A0AD /* BDBJHNewsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDBJHNewsCell.m; sourceTree = "<group>"; };
 		49DDE22D249F69D2001C0643 /* BJHao.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = BJHao.geojson; sourceTree = "<group>"; };
 		49DDE26124A09C04001C0643 /* BDTabbarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BDTabbarController.h; sourceTree = "<group>"; };
 		49DDE26224A09C04001C0643 /* BDTabbarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BDTabbarController.m; sourceTree = "<group>"; };
@@ -113,6 +131,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4968226324A73531002F1067 /* BJH(北京号) */ = {
+			isa = PBXGroup;
+			children = (
+				4968226824A757E4002F1067 /* views */,
+				4968226424A73540002F1067 /* viewController */,
+			);
+			path = "BJH(北京号)";
+			sourceTree = "<group>";
+		};
+		4968226424A73540002F1067 /* viewController */ = {
+			isa = PBXGroup;
+			children = (
+				4968226524A7355F002F1067 /* BDBJHMainController.h */,
+				4968226624A7355F002F1067 /* BDBJHMainController.m */,
+				4968226F24A769C4002F1067 /* BDBJHListController.h */,
+				4968227024A769C4002F1067 /* BDBJHListController.m */,
+				4968227224A76B30002F1067 /* UIViewController+BDScroll.h */,
+				4968227324A76B30002F1067 /* UIViewController+BDScroll.m */,
+			);
+			path = viewController;
+			sourceTree = "<group>";
+		};
+		4968226824A757E4002F1067 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				4968226924A75807002F1067 /* BDDefineScrollView.h */,
+				4968226A24A75807002F1067 /* BDDefineScrollView.m */,
+				4968226C24A76895002F1067 /* BDSegmentItemView.h */,
+				4968226D24A76895002F1067 /* BDSegmentItemView.m */,
+				497F256324A9976F00F5A0AD /* BDBJHNewsCell.h */,
+				497F256424A9976F00F5A0AD /* BDBJHNewsCell.m */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
 		496999E224A3916800C398A8 /* Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +258,7 @@
 		6003F593195388D20070C39A /* Example for BeiJingDailyInfomant */ = {
 			isa = PBXGroup;
 			children = (
+				4968226324A73531002F1067 /* BJH(北京号) */,
 				49DDE26624A0A2E2001C0643 /* Mine(我的) */,
 				49DDE26524A0A1BF001C0643 /* Main */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
@@ -455,13 +509,19 @@
 			files = (
 				49DDE28724A2246A001C0643 /* BDAppDelegate+Category.m in Sources */,
 				6003F59E195388D20070C39A /* BDAppDelegate.m in Sources */,
+				4968227124A769C4002F1067 /* BDBJHListController.m in Sources */,
 				496999E524A391CD00C398A8 /* BDTestViewController.m in Sources */,
+				4968226724A7355F002F1067 /* BDBJHMainController.m in Sources */,
 				6003F5A7195388D20070C39A /* BDMeViewController.m in Sources */,
+				4968226E24A76895002F1067 /* BDSegmentItemView.m in Sources */,
 				49DDE26324A09C04001C0643 /* BDTabbarController.m in Sources */,
 				49DDE28124A20221001C0643 /* BDMeBaoLiaoReusableView.m in Sources */,
 				49DDE27E24A1EBC0001C0643 /* BDMeTopFourCell.m in Sources */,
+				4968226B24A75807002F1067 /* BDDefineScrollView.m in Sources */,
+				4968227424A76B30002F1067 /* UIViewController+BDScroll.m in Sources */,
 				49DDE26F24A0D7C3001C0643 /* BDMeHeadView.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				497F256524A9976F00F5A0AD /* BDBJHNewsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
