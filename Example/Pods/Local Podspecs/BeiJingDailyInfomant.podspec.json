@@ -24,6 +24,9 @@
       "BeiJingDailyInfomant/Assets/*.png"
     ]
   },
+  "info_plist": {
+    "NSCameraUsageDescription": "要用您的相机"
+  },
   "prefix_header_file": "PrefixHeader.pch",
   "frameworks": [
     "MobileCoreServices",

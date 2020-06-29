@@ -19,28 +19,30 @@ static NSString *const BDInfomantCommitPicCellID = @"BDInfomantCommitPicCellID";
 static NSString *const BDInfomantSelectTopicCellID = @"BDInfomantSelectTopicCellID";
 static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTelePhoneCellID";
 
-
-
 @interface BDInfomantCommitController ()
 <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextFieldDelegate,UITextViewDelegate,TemplateBaseCellCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, weak) UITextField *textField;
-@property (nonatomic, weak) UITextView *textView;
-@property (nonatomic, weak) UITextField *phoneField;
-
-@property (nonatomic, strong) UIImagePickerController *imagePickerVc;
-@property (strong, nonatomic) CLLocation *location;
-@property (nonatomic, strong) NSOperationQueue *operationQueue;
+@property (nonatomic, weak) UITextField *textField;    //title
+@property (nonatomic, weak) UITextView *textView;      //描述
+@property (nonatomic, weak) UITextField *phoneField;   //手机号
+@property (nonatomic, strong) UIImagePickerController *imagePickerVc; //访问相机
+@property (nonatomic, strong) CLLocation *location;                   //获取定位权限
+@property (nonatomic, strong) NSOperationQueue *operationQueue;       //设置上传视频或图片的最大并发数量，防止内存溢出
 @end
 
 #define MAXVIDEOINTERVAL 60   //选择视频的最大时长
 #define MINVIDEOINTERVAL 10   //选择视频的最小时长
+#define LIMITCOMIITTIMES 10   //每日提交限制次数
+#define MAXADDFUJIANCOUNT 9   //可添加附件最大数量
 
 @implementation BDInfomantCommitController
 {
     CGFloat itemWH;  //item 宽高
+    BOOL _isAnimation;  //是否正在执行平移
     NSMutableArray *_selectedPhotos;   //选中图片
     NSMutableArray *_selectedAssets;   //选中图片asset
+    YJDateFormatter *_dataFormater;    //日历
+    NSString *_defaultKey;             //获取今日提交数量的key
 }
 
 - (void)viewDidLoad {
@@ -50,6 +52,7 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
     _selectedPhotos = [NSMutableArray array];
     _selectedAssets = [NSMutableArray array];
     self.collectionView.backgroundColor = GMBGColor255;
+    [self initConfigs];
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -66,7 +69,7 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (section == 2) {
-        if (_selectedPhotos.count >= 9) { //最多添加9个
+        if (_selectedPhotos.count >= MAXADDFUJIANCOUNT) { //最多添加9个
             return _selectedPhotos.count;
         }
         return _selectedPhotos.count + 1;
@@ -160,18 +163,16 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
                 [self presentViewController:vc animated:YES completion:nil];
             } else { // preview photos / 预览照片
                 TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithSelectedAssets:_selectedAssets selectedPhotos:_selectedPhotos index:indexPath.item];
-                imagePickerVc.maxImagesCount = 9;
+                imagePickerVc.maxImagesCount = MAXADDFUJIANCOUNT;
                 imagePickerVc.allowPickingGif = NO;
                 imagePickerVc.allowPickingOriginalPhoto = NO;
                 imagePickerVc.allowPickingMultipleVideo = YES;
                 imagePickerVc.showSelectedIndex = YES;
-//                imagePickerVc.isSelectOriginalPhoto = _isSelectOriginalPhoto;
                 imagePickerVc.videoMaximumDuration = MAXVIDEOINTERVAL;
                 imagePickerVc.modalPresentationStyle = UIModalPresentationFullScreen;
                 [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
                     self->_selectedPhotos = [NSMutableArray arrayWithArray:photos];
                     self->_selectedAssets = [NSMutableArray arrayWithArray:assets];
-//                    self->_isSelectOriginalPhoto = isSelectOriginalPhoto;
                     [self->_collectionView reloadData];
                     self->_collectionView.contentSize = CGSizeMake(0, ((self->_selectedPhotos.count + 2) / 3 ) * (4 + (ScreenW - 2 * 4 - 4) / 3 - 4));
                 }];
@@ -186,12 +187,12 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
     }
 }
 #pragma mark layout
-//y
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    if (section == 2) return  10*kWidthRatio;
+    if (section ==2) return 10*kWidthRatio;
     return 0;
 }
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    if (section == 1) return UIEdgeInsetsMake(0, 0, 10*kWidthRatio, 0);
     if (section == 2) return UIEdgeInsetsMake(0, 15*kWidthRatio, 0, 15*kWidthRatio);
     if (section == 3) return UIEdgeInsetsMake(35*kWidthRatio, 0, 0, 0);
     return UIEdgeInsetsZero;
@@ -242,19 +243,11 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
     } completion:^(BOOL finished) {
         [self->_collectionView reloadData];
     }];
-
-//    NSLog(@"%zd",index);
 }
 
 #pragma mark - TZImagePickerController
 - (void)pushTZImagePickerController {
-    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 columnNumber:9 delegate:self pushPhotoPickerVc:YES];
-    // imagePickerVc.barItemTextColor = [UIColor blackColor];
-    // [imagePickerVc.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
-    // imagePickerVc.navigationBar.tintColor = [UIColor blackColor];
-    // imagePickerVc.naviBgColor = [UIColor whiteColor];
-    // imagePickerVc.navigationBar.translucent = NO;
-//    imagePickerVc.delegate = self;
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:MAXADDFUJIANCOUNT columnNumber:MAXADDFUJIANCOUNT delegate:self pushPhotoPickerVc:YES];
 #pragma mark - 五类个性化设置，这些参数都可以不传，此时会走默认设置
     imagePickerVc.isSelectOriginalPhoto = NO;
     // 1.设置目前已经选中的图片数组
@@ -265,27 +258,13 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
     [imagePickerVc setUiImagePickerControllerSettingBlock:^(UIImagePickerController *imagePickerController) {
         imagePickerController.videoQuality = UIImagePickerControllerQualityTypeHigh;
     }];
-    // imagePickerVc.photoWidth = 1600;
-    // imagePickerVc.photoPreviewMaxWidth = 1600;
-    // 2. Set the appearance
     // 2. 在这里设置imagePickerVc的外观
-    // imagePickerVc.navigationBar.barTintColor = [UIColor greenColor];
-    // imagePickerVc.oKButtonTitleColorDisabled = [UIColor lightGrayColor];
-    // imagePickerVc.oKButtonTitleColorNormal = [UIColor greenColor];
-    // imagePickerVc.navigationBar.translucent = NO;
     imagePickerVc.iconThemeColor = [UIColor colorWithRed:31 / 255.0 green:185 / 255.0 blue:34 / 255.0 alpha:1.0];
     imagePickerVc.showPhotoCannotSelectLayer = YES;
     imagePickerVc.cannotSelectLayerColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
     [imagePickerVc setPhotoPickerPageUIConfigBlock:^(UICollectionView *collectionView, UIView *bottomToolBar, UIButton *previewButton, UIButton *originalPhotoButton, UILabel *originalPhotoLabel, UIButton *doneButton, UIImageView *numberImageView, UILabel *numberLabel, UIView *divideLine) {
         [doneButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     }];
-    /*
-    [imagePickerVc setAssetCellDidSetModelBlock:^(TZAssetCell *cell, UIImageView *imageView, UIImageView *selectImageView, UILabel *indexLabel, UIView *bottomView, UILabel *timeLength, UIImageView *videoImgView) {
-        cell.contentView.clipsToBounds = YES;
-        cell.contentView.layer.cornerRadius = cell.contentView.tz_width * 0.5;
-    }];
-     */
-    // 3. Set allow picking video & photo & originalPhoto or not
     // 3. 设置是否可以选择视频/图片/原图
     imagePickerVc.allowPickingVideo = YES;
     imagePickerVc.allowPickingImage = YES;
@@ -294,14 +273,7 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
     imagePickerVc.allowPickingMultipleVideo = YES; // 是否可以多选视频
     // 4. 照片排列按修改时间升序
     imagePickerVc.sortAscendingByModificationDate = YES;
-    
-    // imagePickerVc.minImagesCount = 3;
-    // imagePickerVc.alwaysEnableDoneBtn = YES;
-    // imagePickerVc.minPhotoWidthSelectable = 3000;
-    // imagePickerVc.minPhotoHeightSelectable = 2000;
-    
-    /// 5. Single selection mode, valid when maxImagesCount = 1
-    /// 5. 单选模式,maxImagesCount为1时才生效
+    // 5. 单选模式,maxImagesCount为1时才生效
     imagePickerVc.showSelectBtn = NO;
     imagePickerVc.allowCrop = NO;
     imagePickerVc.needCircleCrop = NO;
@@ -311,24 +283,6 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
     NSInteger top = (ScreenW - widthHeight) / 2;
     imagePickerVc.cropRect = CGRectMake(left, top, widthHeight, widthHeight);
     imagePickerVc.scaleAspectFillCrop = YES;
-    // 设置横屏下的裁剪尺寸
-    // imagePickerVc.cropRectLandscape = CGRectMake((self.view.tz_height - widthHeight) / 2, left, widthHeight, widthHeight);
-    /*
-     [imagePickerVc setCropViewSettingBlock:^(UIView *cropView) {
-     cropView.layer.borderColor = [UIColor redColor].CGColor;
-     cropView.layer.borderWidth = 2.0;
-     }];*/
-    
-    //imagePickerVc.allowPreview = NO;
-    // 自定义导航栏上的返回按钮
-    /*
-    [imagePickerVc setNavLeftBarButtonSettingBlock:^(UIButton *leftButton){
-        [leftButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-        [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 20)];
-    }];
-    imagePickerVc.delegate = self;
-    */
-    
     // Deprecated, Use statusBarStyle
     // imagePickerVc.isStatusBarDefault = NO;
     imagePickerVc.statusBarStyle = UIStatusBarStyleLightContent;
@@ -336,56 +290,21 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
     imagePickerVc.showSelectedIndex = YES;
     // 设置拍照时是否需要定位，仅对选择器内部拍照有效，外部拍照的，请拷贝demo时手动把pushImagePickerController里定位方法的调用删掉
     imagePickerVc.allowCameraLocation = YES;
-    
-    // 自定义gif播放方案
-//    [[TZImagePickerConfig sharedInstance] setGifImagePlayBlock:^(TZPhotoPreviewView *view, UIImageView *imageView, NSData *gifData, NSDictionary *info) {
-//        FLAnimatedImage *animatedImage = [FLAnimatedImage animatedImageWithGIFData:gifData];
-//        FLAnimatedImageView *animatedImageView;
-//        for (UIView *subview in imageView.subviews) {
-//            if ([subview isKindOfClass:[FLAnimatedImageView class]]) {
-//                animatedImageView = (FLAnimatedImageView *)subview;
-//                animatedImageView.frame = imageView.bounds;
-//                animatedImageView.animatedImage = nil;
-//            }
-//        }
-//        if (!animatedImageView) {
-//            animatedImageView = [[FLAnimatedImageView alloc] initWithFrame:imageView.bounds];
-//            animatedImageView.runLoopMode = NSDefaultRunLoopMode;
-//            [imageView addSubview:animatedImageView];
-//        }
-//        animatedImageView.animatedImage = animatedImage;
-//    }];
-    
     // 设置首选语言 / Set preferred language
     imagePickerVc.preferredLanguage = @"zh-Hans";
-    // 设置languageBundle以使用其它语言 / Set languageBundle to use other language
-    // imagePickerVc.languageBundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"tz-ru" ofType:@"lproj"]];
-    
-#pragma mark - 到这里为止
-    
-    // You can get the photos by block, the same as by delegate.
-    // 你可以通过block或者代理，来得到用户选择的照片.
-    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
 
-    }];
     imagePickerVc.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
-
 
 #pragma mark UIImagePickController
 - (void)takePhoto {
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied) {
         // 无相机权限 做一个友好的提示
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"无法使用相机" message:@"请在iPhone的""设置-隐私-相机""中允许访问相机" preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-        }]];
-        [self presentViewController:alertController animated:YES completion:nil];
+        [self friendshipTipsToGetPermission];
     } else if (authStatus == AVAuthorizationStatusNotDetermined) {
-        // fix issue 466, 防止用户首次拍照拒绝授权时相机页黑屏
+        //防止用户首次拍照拒绝授权时相机页黑屏
         [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
             if (granted) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -395,12 +314,7 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
         }];
         // 拍照之前还需要检查相册权限
     } else if ([PHPhotoLibrary authorizationStatus] == 2) { // 已被拒绝，没有相册权限，将无法保存拍的照片
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"无法访问相册" message:@"请在iPhone的""设置-隐私-相册""中允许访问相册" preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-        }]];
-        [self presentViewController:alertController animated:YES completion:nil];
+        [self friendshipTipsToGetPermission];
     } else if ([PHPhotoLibrary authorizationStatus] == 0) { // 未请求过相册权限
         [[TZImageManager manager] requestAuthorizationWithCompletion:^{
             [self takePhoto];
@@ -438,37 +352,31 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
 }
 
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [picker dismissViewControllerAnimated:YES completion:nil];
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
-    
     TZImagePickerController *tzImagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
     tzImagePickerVc.sortAscendingByModificationDate = YES;
     [tzImagePickerVc showProgressHUD];
     if ([type isEqualToString:@"public.image"]) {
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
         NSDictionary *meta = [info objectForKey:UIImagePickerControllerMediaMetadata];
-        // save photo and get asset / 保存图片，获取到asset
+        //保存图片，获取到asset
         [[TZImageManager manager] savePhotoWithImage:image meta:meta location:self.location completion:^(PHAsset *asset, NSError *error){
             [tzImagePickerVc hideProgressHUD];
             if (error) {
                 NSLog(@"图片保存失败 %@",error);
             } else {
                 TZAssetModel *assetModel = [[TZImageManager manager] createModelWithAsset:asset];
-//                if (self.allowCropSwitch.isOn) { // 允许裁剪,去裁剪
-//                    TZImagePickerController *imagePicker = [[TZImagePickerController alloc] initCropTypeWithAsset:assetModel.asset photo:image completion:^(UIImage *cropImage, id asset) {
-//                        [self refreshCollectionViewWithAddedAsset:asset image:cropImage];
-//                    }];
-//                    imagePicker.allowPickingImage = YES;
-//                    imagePicker.needCircleCrop = self.needCircleCropSwitch.isOn;
-//                    imagePicker.circleCropRadius = 100;
-//                    [self presentViewController:imagePicker animated:YES completion:nil];
-//                } else {
-                    [self refreshCollectionViewWithAddedAsset:assetModel.asset image:image];
-//                }
+                [self refreshCollectionViewWithAddedAsset:assetModel.asset image:image];
             }
         }];
     } else if ([type isEqualToString:@"public.movie"]) {
         NSURL *videoUrl = [info objectForKey:UIImagePickerControllerMediaURL];
+        CGFloat duration = [self getVideoDuration:videoUrl];
+        if (duration < MINVIDEOINTERVAL) {
+            [YJHudHelper showTextWithTitle:@"录制时间需大于10秒钟" toView:KEYWINDOW dismissAfterDelay:2.0f];
+            [picker dismissViewControllerAnimated:YES completion:nil];
+            return;
+        }
         if (videoUrl) {
             [[TZImageManager manager] saveVideoWithUrl:videoUrl location:self.location completion:^(PHAsset *asset, NSError *error) {
                 [tzImagePickerVc hideProgressHUD];
@@ -483,6 +391,17 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
             }];
         }
     }
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+//获取视频时间
+- (CGFloat) getVideoDuration:(NSURL*) URL{
+    NSDictionary *opts = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO]
+                                                     forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
+    AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:URL options:opts];
+    float second = 0;
+    second = urlAsset.duration.value/urlAsset.duration.timescale;
+    return second;
 }
 
 - (void)refreshCollectionViewWithAddedAsset:(PHAsset *)asset image:(UIImage *)image {
@@ -502,17 +421,10 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
 }
 
 #pragma mark - TZImagePickerControllerDelegate
-
-/// User click cancel button
-/// 用户点击了取消
+// 用户点击了取消
 - (void)tz_imagePickerControllerDidCancel:(TZImagePickerController *)picker {
-    // NSLog(@"cancel");
+     NSLog(@"cancel");
 }
-// The picker should dismiss itself; when it dismissed these handle will be called.
-// You can also set autoDismiss to NO, then the picker don't dismiss itself.
-// If isOriginalPhoto is YES, user picked the original photo.
-// You can get original photo with asset, by the method [[TZImageManager manager] getOriginalPhotoWithAsset:completion:].
-// The UIImage Object in photos default width is 828px, you can set it by photoWidth property.
 // 这个照片选择器会自己dismiss，当选择器dismiss的时候，会执行下面的代理方法
 // 你也可以设置autoDismiss属性为NO，选择器就不会自己dismis了
 // 如果isSelectOriginalPhoto为YES，表明用户选择了原图
@@ -521,17 +433,13 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos {
     _selectedPhotos = [NSMutableArray arrayWithArray:photos];
     _selectedAssets = [NSMutableArray arrayWithArray:assets];
-//    _isSelectOriginalPhoto = isSelectOriginalPhoto;
     [_collectionView reloadData];
-    // _collectionView.contentSize = CGSizeMake(0, ((_selectedPhotos.count + 2) / 3 ) * (_margin + _itemWH));
-    
     // 1.打印图片名字
     [self printAssetsName:assets];
     // 2.图片位置信息
     for (PHAsset *phAsset in assets) {
         NSLog(@"location:%@",phAsset.location);
     }
-    
     // 3. 获取原图的示例，用队列限制最大并发为1，避免内存暴增
     self.operationQueue = [[NSOperationQueue alloc] init];
     self.operationQueue.maxConcurrentOperationCount = 2;
@@ -548,10 +456,8 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
     }
 }
 
-// If user picking a video and allowPickingMultipleVideo is NO, this callback will be called.
-// If allowPickingMultipleVideo is YES, will call imagePickerController:didFinishPickingPhotos:sourceAssets:isSelectOriginalPhoto:
 // 如果用户选择了一个视频且allowPickingMultipleVideo是NO，下面的代理方法会被执行
-// 如果allowPickingMultipleVideo是YES，将会调用imagePickerController:didFinishPickingPhotos:sourceAssets:isSelectOriginalPhoto:
+//如果allowPickingMultipleVideo是YES，将会调用imagePickerController:didFinishPickingPhotos:sourceAssets:isSelectOriginalPhoto:
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(PHAsset *)asset {
     _selectedPhotos = [NSMutableArray arrayWithArray:@[coverImage]];
     _selectedAssets = [NSMutableArray arrayWithArray:@[asset]];
@@ -568,30 +474,22 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
     // _collectionView.contentSize = CGSizeMake(0, ((_selectedPhotos.count + 2) / 3 ) * (_margin + _itemWH));
 }
 
-// If user picking a gif image and allowPickingMultipleVideo is NO, this callback will be called.
-// If allowPickingMultipleVideo is YES, will call imagePickerController:didFinishPickingPhotos:sourceAssets:isSelectOriginalPhoto:
 // 如果用户选择了一个gif图片且allowPickingMultipleVideo是NO，下面的代理方法会被执行
-// 如果allowPickingMultipleVideo是YES，将会调用imagePickerController:didFinishPickingPhotos:sourceAssets:isSelectOriginalPhoto:
+//如果allowPickingMultipleVideo是YES，将会调用imagePickerController:didFinishPickingPhotos:sourceAssets:isSelectOriginalPhoto:
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingGifImage:(UIImage *)animatedImage sourceAssets:(PHAsset *)asset {
     _selectedPhotos = [NSMutableArray arrayWithArray:@[animatedImage]];
     _selectedAssets = [NSMutableArray arrayWithArray:@[asset]];
     [_collectionView reloadData];
 }
-
-// Decide album show or not't
 // 决定相册显示与否
 - (BOOL)isAlbumCanSelect:(NSString *)albumName result:(PHFetchResult *)result {
     /*
     if ([albumName isEqualToString:@"个人收藏"]) {
         return NO;
-    }
-    if ([albumName isEqualToString:@"视频"]) {
-        return NO;
     }*/
     return YES;
 }
 
-// Decide asset show or not't
 // 决定asset显示与否
 - (BOOL)isAssetCanSelect:(PHAsset *)asset {
     
@@ -619,6 +517,51 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
     }
 }
 #pragma mark private
+-(void)initConfigs{
+    //    注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillhide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    //异步初始化日历
+    BLOCKSELF
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        blockSelf-> _dataFormater = [YJDateFormatter sharedInstance];
+        blockSelf-> _dataFormater.dateFormat = @"YYYY-MM-dd";
+        blockSelf-> _defaultKey = [blockSelf-> _dataFormater stringFromDate:[NSDate date]];
+    });
+}
+
+-(void)keyBoardWillShow:(NSNotification *)note{
+    if (_isAnimation || !self.phoneField.isFirstResponder) {
+        return;
+    }
+    NSTimeInterval animateduration;
+    [[note.userInfo objectOrNilForKey:@"UIKeyboardAnimationDurationUserInfoKey"] getValue:&animateduration];
+    BLOCKSELF
+    WEAKSELF
+    [UIView animateWithDuration:animateduration animations:^{
+        blockSelf->_isAnimation = YES;
+        weakSelf.collectionView.transform = CGAffineTransformMakeTranslation(0, -200*kWidthRatio);
+    } completion:^(BOOL finished) {
+        blockSelf->_isAnimation = NO;
+    }];
+}
+-(void)keyBoardWillhide:(NSNotification *)note{
+    if (_isAnimation || !self.phoneField.isFirstResponder) {
+        return;
+    }
+    NSTimeInterval animateduration;
+    [[note.userInfo objectOrNilForKey:@"UIKeyboardAnimationDurationUserInfoKey"] getValue:&animateduration];
+    WEAKSELF
+    BLOCKSELF
+    [UIView animateWithDuration:animateduration animations:^{
+        blockSelf->_isAnimation = YES;
+        weakSelf.collectionView.transform = CGAffineTransformMakeTranslation(0, 0);
+    }completion:^(BOOL finished) {
+        blockSelf->_isAnimation = NO;
+    }];
+}
+
 -(UIButton *)rightBarButton{
     EazyClickButton *rightBtn = [EazyClickButton buttonWithType:UIButtonTypeSystem];
     [rightBtn setTitleColor:GMRedTextColor238_50_40 forState:UIControlStateNormal];
@@ -626,14 +569,53 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
     rightBtn.titleLabel.font = PFR16Font;
     return rightBtn;
 }
-
+//提交
 -(void)rightBarButtonItemClick{
-    NSLog(@"%@",self.textField.text);
-    NSLog(@"%@",self.textView.text);
-    NSLog(@"%@",self.phoneField.text);
+    NSString *title = [self.textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *des = [self.textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *phoneNum = [self.phoneField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (TO_STR(title).length==0 || TO_STR(des).length==0 || TO_STR(phoneNum).length == 0) {
+        [YJHudHelper showTextWithTitle:@"您还有信息未填写" toView:KEYWINDOW dismissAfterDelay:1];
+        return;
+    }
+    if (title.length>30) {
+        [YJHudHelper showTextWithTitle:@"标题需在30字以内" toView:KEYWINDOW dismissAfterDelay:1];
+        return;
+    }
+    if (![YJFilterTool hasChinese:des]) {
+        [YJHudHelper showTextWithTitle:@"请输入正确的详细描述信息" toView:KEYWINDOW dismissAfterDelay:1];
+        return;
+    }
+    if (![YJFilterTool filterByPhoneNumber:phoneNum]) {
+        [YJHudHelper showTextWithTitle:@"请输入正确的电话号码" toView:KEYWINDOW dismissAfterDelay:1];
+        return;
+    }
+    
+    NSDictionary *limitDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"COMIITLIMIT"];
+    NSInteger HasCommitToday = [[limitDic objectForKey2:_defaultKey] integerValue];
+    if (LIMITCOMIITTIMES <= HasCommitToday){
+        [YJHudHelper showTextWithTitle:@"今日提交已达最大次数限制" toView:KEYWINDOW dismissAfterDelay:2.0];
+    }else{
+        [YJHudHelper showTextWithTitle:[NSString stringWithFormat:@"提交成功，今日还可提交%zd次",LIMITCOMIITTIMES-HasCommitToday-1] toView:KEYWINDOW dismissAfterDelay:2.0];
+        NSDictionary *dic = @{
+            _defaultKey: @(HasCommitToday+1),
+        };
+        [[NSUserDefaults standardUserDefaults] setObject:dic forKey:@"COMIITLIMIT"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    WEAKSELF
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    });
+    
 }
-
-/// 打印图片名字
+//没有相机权限友好提示
+-(void)friendshipTipsToGetPermission{
+    [YJAlertViewTool showAlertView:self title:@"无法访问相册" message:@"请在iPhone的""设置-隐私-相册""中允许访问相册" cancelTitle:@"取消" otherTitle:@"设置" cancelBlock:^{} confrimBlock:^{
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }];
+}
+// 打印图片名字
 - (void)printAssetsName:(NSArray *)assets {
     NSString *fileName;
     for (PHAsset *asset in assets) {
@@ -641,6 +623,7 @@ static NSString *const BDInfomantSelectTelePhoneCellID = @"BDInfomantSelectTeleP
         NSLog(@"图片名字:%@",fileName);
     }
 }
+
 #pragma mark lazy load
 -(UICollectionView *)collectionView{
     if (_collectionView == nil) {

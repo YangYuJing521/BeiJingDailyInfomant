@@ -35,6 +35,9 @@ TODO: Add long description of the pod here.
   s.resource_bundles = {
     'BeiJingDailyInfomant' => ['BeiJingDailyInfomant/Assets/*.png']
   }
+  s.info_plist = {
+    'NSCameraUsageDescription' => '要用您的相机'
+  }
   #s.prefix_header_contents = '#import YJUsefulUIKit.h', '#import MJExtension.h'
   s.prefix_header_file = false
   s.prefix_header_file = 'PrefixHeader.pch'

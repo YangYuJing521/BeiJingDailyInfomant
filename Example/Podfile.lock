@@ -1,19 +1,4 @@
 PODS:
-  - AFNetworking (3.2.1):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - AFNetworking/UIKit (= 3.2.1)
-  - AFNetworking/NSURLSession (3.2.1):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - AFNetworking/UIKit (3.2.1):
-    - AFNetworking/NSURLSession
   - BeiJingDailyInfomant (0.1.0):
     - Masonry
     - MGJRouter
@@ -23,7 +8,6 @@ PODS:
   - Masonry (1.1.0)
   - MGJRouter (0.10.0)
   - MJExtension (3.2.1)
-  - MJRefresh (3.4.3)
   - SDWebImage (5.8.1):
     - SDWebImage/Core (= 5.8.1)
   - SDWebImage/Core (5.8.1)
@@ -61,19 +45,15 @@ PODS:
   - YYCategories/no-arc (1.0.4)
 
 DEPENDENCIES:
-  - AFNetworking
   - BeiJingDailyInfomant (from `./LocalPods/BeiJingDailyInfomant`)
-  - MJRefresh
   - SDWebImage
   - YJUsefulUIKit (~> 1.0.1)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - AFNetworking
     - Masonry
     - MGJRouter
     - MJExtension
-    - MJRefresh
     - SDWebImage
     - TZImagePickerController
     - YJUsefulUIKit
@@ -84,17 +64,15 @@ EXTERNAL SOURCES:
     :path: "./LocalPods/BeiJingDailyInfomant"
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  BeiJingDailyInfomant: b9fbdc34fdb992ce634ce5489d55d8e958170279
+  BeiJingDailyInfomant: b56166dedd5279a2c275d4c5e5050d1b3058af73
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MGJRouter: 15d94541eb2cc81eff7d577337288feb7ae9575f
   MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
-  MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
   SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
   TZImagePickerController: 36ca728ec681228918aa82e993aaab1962281b72
   YJUsefulUIKit: 6edce3d9f15fa12e43fc512aedfde0ffe48fa49b
   YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
 
-PODFILE CHECKSUM: 939924928f715b46c575dd7a45babd2c0f98672f
+PODFILE CHECKSUM: 2e84184039a63fb7c1c8b045014244a857b63c62
 
 COCOAPODS: 1.9.3

@@ -205,7 +205,7 @@
         self.phoneField.clearsOnBeginEditing = NO;
         self.phoneField.returnKeyType = UIReturnKeyDone;
         self.phoneField.clearButtonMode = UITextFieldViewModeNever;
-        self.phoneField.keyboardType = UIKeyboardTypeDefault;
+        self.phoneField.keyboardType = UIKeyboardTypePhonePad;
         [self.phoneField mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self.mas_right).offset(-15);
             make.centerY.mas_equalTo(self);

@@ -124,7 +124,6 @@ static NSString *const BDMeBaoLiaoReusableViewID = @"BDMeBaoLiaoReusableViewID";
     }
 }
 
-
 #pragma mark lazy load
 -(UICollectionView *)collectionView{
     if (_collectionView == nil) {
