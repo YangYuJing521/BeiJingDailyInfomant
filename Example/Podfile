@@ -7,15 +7,9 @@ platform :ios, '8.0'
 target 'BeiJingDailyInfomant_Example' do
   pod 'BeiJingDailyInfomant', :path => './LocalPods/BeiJingDailyInfomant'
   pod 'YJUsefulUIKit', '~> 1.0.1'
-  
-  #pod 'YYCategories'  
-  #pod 'Masonry'
-  #pod 'MJRefresh'
+
+  #第三方
   pod 'SDWebImage'
-  #pod 'pop'
-  #pod 'MJExtension'
-  #pod 'MGJRouter'
-  #pod 'AFNetworking'
   
   target 'BeiJingDailyInfomant_Tests' do
     inherit! :search_paths
