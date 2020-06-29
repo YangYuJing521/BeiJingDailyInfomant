@@ -60,7 +60,7 @@
                               MallImgKey    : @"icon_chat",
                               MallSelImgKey : @"icon_chat_act"},
                             @{
-                              MallClassKey  : @"BDTestViewController",
+                              MallClassKey  : @"BDBJHMainController",
                               MallTitleKey  : @"北京号",
                               MallImgKey    : @"icon-shopkeeper",
                               MallSelImgKey : @"icon-shopkeeper-act",},

@@ -23,7 +23,6 @@
         //ios 11以下
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    
     //左导航
     if (self.navigationController.childViewControllers.count > 1) {
         UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
